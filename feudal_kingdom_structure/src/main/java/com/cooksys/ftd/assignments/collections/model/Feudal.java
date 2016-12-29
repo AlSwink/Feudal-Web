@@ -13,4 +13,8 @@ public interface Feudal extends Hierarchical<Feudal, Lord> {
      * @return the salary of the capitalist, in dollars
      */
     int getSalary();
+
+	void setId(int size);
+
+	int getId();
 }

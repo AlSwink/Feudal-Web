@@ -1,13 +1,16 @@
 package com.cooksys.ftd.assignments.collections;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import com.cooksys.ftd.assignments.collections.hierarchy.Hierarchy;
 import com.cooksys.ftd.assignments.collections.model.Feudal;
 import com.cooksys.ftd.assignments.collections.model.Lord;
 import com.cooksys.ftd.assignments.collections.model.Peon;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import java.util.*;
 
 public class Kingdom implements Hierarchy<Feudal, Lord> {
 	
@@ -28,35 +31,35 @@ public class Kingdom implements Hierarchy<Feudal, Lord> {
      * If the given element has no parent and is not a Parent itself,
      * do not add it and return false
      *
-     * @param capitalist the element to add to the hierarchy
+     * @param feudal the element to add to the hierarchy
      * @return true if the element was added successfully, false otherwise
      */
     @Override
-    public boolean add(Feudal capitalist) {
-        if(capitalist == null || has(capitalist) || (capitalist instanceof Peon && !capitalist.hasParent()))
+    public boolean add(Feudal feudal) {
+        if(feudal == null || has(feudal) || (feudal instanceof Peon && !feudal.hasParent()))
         	return false;
         
-        if(capitalist.getParent() != null && !orgStructure.containsKey(capitalist.getParent()))
-    		add(capitalist.getParent());
+        if(feudal.getParent() != null && !orgStructure.containsKey(feudal.getParent()))
+    		add(feudal.getParent());
         
-        allItems.add(capitalist);
+        allItems.add(feudal);
         
-        if(capitalist instanceof Lord)
-           	orgStructure.put((Lord)capitalist, new HashSet<Feudal>());
+        if(feudal instanceof Lord)
+           	orgStructure.put((Lord)feudal, new HashSet<Feudal>());
         
-        if(capitalist.hasParent())
-        	orgStructure.get(capitalist.getParent()).add(capitalist);
+        if(feudal.hasParent())
+        	orgStructure.get(feudal.getParent()).add(feudal);
         
         return true;
     }
 
     /**
-     * @param capitalist the element to search for
+     * @param feudal the element to search for
      * @return true if the element has been added to the hierarchy, false otherwise
      */
     @Override
-    public boolean has(Feudal capitalist) {
-        return allItems.contains(capitalist);
+    public boolean has(Feudal feudal) {
+        return allItems.contains(feudal);
     }
 
     /**
@@ -102,24 +105,24 @@ public class Kingdom implements Hierarchy<Feudal, Lord> {
     }
 
     /**
-     * @param capitalist
+     * @param feudal
      * @return the parent chain of the given element, starting with its direct parent,
      * then its parent's parent, etc, or an empty list if the given element has no parent
      * or if its parent is not in the hierarchy
      */
     @Override
-    public List<Lord> getParentChain(Feudal capitalist) {
-        List<Lord> result = new ArrayList<>();
-        if(!has(capitalist))
-        	return result;
-    	return getParentChain(capitalist, result);
+    public List<Lord> getParentChain(Feudal feudal) {
+        List<Lord> chain = new ArrayList<>();
+        if(!has(feudal))
+        	return chain;
+    	return getParentChain(feudal, chain);
         
     }
     
-    private List<Lord> getParentChain(Feudal capitalist, List<Lord> chain) {
-        if(capitalist.getParent() != null) {
-        	chain.add(capitalist.getParent());
-        	getParentChain(capitalist.getParent(), chain);
+    private List<Lord> getParentChain(Feudal feudal, List<Lord> chain) {
+        if(feudal.getParent() != null) {
+        	chain.add(feudal.getParent());
+        	getParentChain(feudal.getParent(), chain);
         }
         return chain;
 
