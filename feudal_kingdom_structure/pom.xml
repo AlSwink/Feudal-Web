@@ -5,7 +5,6 @@
     <modelVersion>4.0.0</modelVersion>
    
    <properties>
-      <junit.version>4.12</junit.version>
       <quickcheck.version>0.6.1</quickcheck.version>
     </properties>
 

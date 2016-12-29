@@ -76,6 +76,11 @@
 			<artifactId>feudal_kingdom_structure</artifactId>
 			<version>${ftd.feudal.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>feudal_web</groupId>
+			<artifactId>feudal_kingdom_data_transfer_objects</artifactId>
+			<version>${ftd.feudal.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
