@@ -1,12 +1,18 @@
-package feudal.web.dto;
+package feudal_web.dto;
 
-public class PeonWithoutId {
-
+public class PeonWithIdDto {
+	
 	private int id;
 	private String name;
 	private int salary;
-//	private Lord parent;
+	private int parentId;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -19,32 +25,22 @@ public class PeonWithoutId {
 	public void setSalary(int salary) {
 		this.salary = salary;
 	}
-	
-	public int getId() {
-		return id;
+	public int getParentId() {
+		return parentId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
-/*	
-	public Lord getParent() {
-		return parent;
-	}
-	public void setParent(Lord parent) {
-		this.parent = parent;
-	}
-*/	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-//		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
+		result = prime * result + parentId;
 		result = prime * result + salary;
 		return result;
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -53,7 +49,7 @@ public class PeonWithoutId {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PeonWithoutId other = (PeonWithoutId) obj;
+		PeonWithIdDto other = (PeonWithIdDto) obj;
 		if (id != other.id)
 			return false;
 		if (name == null) {
@@ -61,16 +57,12 @@ public class PeonWithoutId {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-/*
-		if (parent == null) {
-			if (other.parent != null)
-				return false;
-		} else if (!parent.equals(other.parent))
+		if (parentId != other.parentId)
 			return false;
-*/		
 		if (salary != other.salary)
 			return false;
 		return true;
 	}
+
 	
 }

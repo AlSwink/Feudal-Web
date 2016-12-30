@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cooksys.ftd.assignments.collections.Kingdom;
 import com.cooksys.ftd.assignments.collections.model.Feudal;
+import com.cooksys.ftd.assignments.collections.model.Peon;
 
 import feudal_web.validator.Validators;
 
@@ -50,6 +51,14 @@ public class KingdomService {
 
 	public Set<Feudal> getElements() {
 		return kingdom.getElements();
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T extends Feudal> T get(int id, Class<T> clazz) {
+		Feudal feudal = get(id);
+		if(clazz.isInstance(feudal))
+			return (T) feudal;
+		return null;
 	}
 	
 }
