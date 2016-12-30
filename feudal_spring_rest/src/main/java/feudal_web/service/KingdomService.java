@@ -53,11 +53,10 @@ public class KingdomService {
 		return kingdom.getElements();
 	}
 
-	@SuppressWarnings("unchecked")
 	public <T extends Feudal> T get(int id, Class<T> clazz) {
 		Feudal feudal = get(id);
 		if(clazz.isInstance(feudal))
-			return (T) feudal;
+			return clazz.cast(feudal);
 		return null;
 	}
 	
