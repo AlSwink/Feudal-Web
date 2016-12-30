@@ -14,8 +14,6 @@ import feudal_web.dto.PeonWithoutIdDto;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PeonMapper {
 	
-	PeonMapper INSTANCE = Mappers.getMapper(PeonMapper.class);
-	
 	@Mappings({
 		@Mapping(source = "parent.id", target = "parentId")
 	})
