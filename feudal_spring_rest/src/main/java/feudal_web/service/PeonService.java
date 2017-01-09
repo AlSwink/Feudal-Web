@@ -6,9 +6,8 @@ import com.cooksys.ftd.assignments.collections.model.Lord;
 import com.cooksys.ftd.assignments.collections.model.Peon;
 
 import feudal_web.service.KingdomService;
-
-import feudal_web.dto.PeonWithoutIdDto;
 import feudal_web.dto.mapper.PeonMapper;
+import feudal_web.dto.peon.PeonWithoutIdDto;
 
 @Service
 public class PeonService {
@@ -28,7 +27,7 @@ public class PeonService {
 	}
 
 	public PeonWithoutIdDto get(int id) {
-		return peonMapper.peonToPeonWithoutIdDto(kingdomService.get(id, Peon.class));
+		return peonMapper.peonToPeonWithoutIdDto(kingdomService.get(id, Peon.class, true));
 	}
 	
 }

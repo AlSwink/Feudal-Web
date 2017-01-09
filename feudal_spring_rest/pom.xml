@@ -6,57 +6,57 @@
 	<parent>
 		<artifactId>feudal_web</artifactId>
 		<groupId>feudal_web</groupId>
-		<version>${ftd.feudal.version}</version>
+		<version>1.0.0</version>
 	</parent>
 
+	<name>Feudal Spring REST</name>
 	<artifactId>feudal_spring_rest</artifactId>
 	<packaging>jar</packaging>
 
-	<name>feudal_spring_rest</name>
 	<description>REST endpoints for feudal data</description>
 
 	<properties>
-		<spring.boot.version>1.4.2.RELEASE</spring.boot.version>
+		<spring.boot.version>1.4.3.RELEASE</spring.boot.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 	</properties>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<!-- Import dependency management from Spring Boot -->
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring.boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
-		<dependency>
-			<!-- Import dependency management from Spring Boot -->
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-dependencies</artifactId>
-			<version>${spring.boot.version}</version>
-			<type>pom</type>
-			<scope>import</scope>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
-			<version>${spring.boot.version}</version>
-		</dependency>
+			</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-actuator-docs</artifactId>
-			<version>${spring.boot.version}</version>
-		</dependency>
+			</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<version>${spring.boot.version}</version>
-		</dependency>
+			</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
-			<version>${spring.boot.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<version>${spring.boot.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
@@ -74,12 +74,12 @@
 		<dependency>
 			<groupId>feudal_web</groupId>
 			<artifactId>feudal_kingdom_structure</artifactId>
-			<version>${ftd.feudal.version}</version>
+			<version>${ftd.feudal.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>feudal_web</groupId>
 			<artifactId>feudal_kingdom_data_transfer_objects</artifactId>
-			<version>${ftd.feudal.version}</version>
+			<version>${ftd.feudal.parent.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -88,10 +88,12 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring.boot.version}</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.0</version>
 				<configuration>
 					<source>${java.source.version}</source>
 					<target>${java.target.version}</target>

@@ -8,8 +8,8 @@ import org.mapstruct.factory.Mappers;
 
 import com.cooksys.ftd.assignments.collections.model.Peon;
 
-import feudal_web.dto.PeonWithIdDto;
-import feudal_web.dto.PeonWithoutIdDto;
+import feudal_web.dto.peon.PeonWithIdDto;
+import feudal_web.dto.peon.PeonWithoutIdDto;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PeonMapper {

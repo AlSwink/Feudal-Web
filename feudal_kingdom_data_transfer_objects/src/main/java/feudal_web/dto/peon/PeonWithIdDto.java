@@ -1,11 +1,32 @@
-package feudal_web.dto;
+package feudal_web.dto.peon;
 
-public class PeonWithoutIdDto {
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
+import feudal_web.dto.validator.idExists.IdExists;
+
+public class PeonWithIdDto {
+	
+	@Min(1)
+	private int id;
+	
+	@Size(min = 2, max = 100)
 	private String name;
+	
+	@Max(99)
 	private int salary;
+	
+	@Min(1)
+	@IdExists
 	private int parentId;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -28,6 +49,7 @@ public class PeonWithoutIdDto {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + parentId;
 		result = prime * result + salary;
@@ -41,7 +63,9 @@ public class PeonWithoutIdDto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PeonWithoutIdDto other = (PeonWithoutIdDto) obj;
+		PeonWithIdDto other = (PeonWithIdDto) obj;
+		if (id != other.id)
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
