@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import feudal_web.dto.peon.PeonWithoutIdDto;
-import feudal_web.service.KingdomService;
 import feudal_web.service.PeonService;
 
 @Validated
@@ -23,7 +22,7 @@ public class PeonController {
 
 	private final PeonService peonService;
 
-	public PeonController(KingdomService kingdomService, PeonService peonService) {
+	public PeonController(PeonService peonService) {
 		super();
 		this.peonService = peonService;
 	}
@@ -35,7 +34,7 @@ public class PeonController {
 	}
 	
 	@GetMapping("{id}")
-	public PeonWithoutIdDto getById(@PathVariable int id, HttpServletResponse response) {
+	public PeonWithoutIdDto get(@PathVariable int id, HttpServletResponse response) {
 		PeonWithoutIdDto dto = peonService.get(id);
 		if (dto == null)
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -43,8 +42,8 @@ public class PeonController {
 	}
 	
 	@PostMapping
-	public int add(@RequestBody @Valid PeonWithoutIdDto peonWithoutIdDto, HttpServletResponse response) {
-		int result = peonService.add(peonWithoutIdDto);
+	public int add(@RequestBody @Valid PeonWithoutIdDto peon, HttpServletResponse response) {
+		int result = peonService.add(peon);
 		if(result > 0)
 			response.setStatus(HttpServletResponse.SC_CREATED);
 		return result;
