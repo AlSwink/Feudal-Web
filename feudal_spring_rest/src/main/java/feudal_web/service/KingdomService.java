@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.cooksys.ftd.assignments.collections.Kingdom;
 import com.cooksys.ftd.assignments.collections.model.Feudal;
+import com.cooksys.ftd.assignments.collections.model.Peon;
 
 import feudal_web.exception.CustomValidationFailedException;
 
@@ -64,6 +65,12 @@ public class KingdomService {
 		else if(exceptionWhenNotFound)
 			throw new CustomValidationFailedException("Cannot find instance of " + clazz.getSimpleName() + " with id of [" + id + "]", HttpStatus.NOT_FOUND);
 		return null;
+	}
+
+	public void put(Peon peon) {
+		//get em
+		feudalIdTracker.get(peon.getId() - 1);
+		//change em
 	}
 	
 }

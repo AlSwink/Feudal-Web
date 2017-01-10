@@ -33,4 +33,10 @@ public class PeonService {
 	public boolean has(int id) {
 		return kingdomService.has(id, Peon.class);
 	}
+
+	public void put(int id, PeonWithoutIdDto peonDto) {
+		Peon peon = peonMapper.peonWithoutIdDtoToPeon(peonDto);
+		peon.setId(id);
+		kingdomService.put(peon);
+	}
 }
