@@ -9,6 +9,11 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.beanvalidation.SpringConstraintValidatorFactory;
 
+/**
+ * Allows validators to search for instances of classes in the IoC container, thereby allowing custom validation annotations to reference an interface without knowing the underlying implementation. Useful when you want seperate projects for your DTO Layer (where you would create the annotation and an associated interface) and Business Layer (where you would create an implementation of the interface)
+ * </br></br>Based on the StackOverflow answer linked below
+ * @see <a href="http://stackoverflow.com/a/18352754">How to avoid cross dependency between layers because of @Constraint validatedBy?</a>
+ */
 @Component
 public class SpringConstraintValidatorFactoryExtension extends SpringConstraintValidatorFactory {
 
