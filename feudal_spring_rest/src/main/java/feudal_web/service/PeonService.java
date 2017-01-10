@@ -29,5 +29,8 @@ public class PeonService {
 	public PeonWithoutIdDto get(int id) {
 		return peonMapper.peonToPeonWithoutIdDto(kingdomService.get(id, Peon.class, true));
 	}
-	
+
+	public boolean has(int id) {
+		return kingdomService.has(id, Peon.class);
+	}
 }

@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = { IdExistsValidator.class })
 public @interface IdExists {
 
-	String message() default "{feudal_web.dto.validator.parentIdExists.message}";
+	String message() default "{feudal_web.dto.validator.idExists.message}";
 	
     Class<?>[] groups() default {};
     

@@ -32,6 +32,10 @@ public class KingdomService {
 	public boolean has(int id) {
 		return id > 0 && id <= feudalIdTracker.size();
 	}
+	
+	public <T extends Feudal> boolean has(int id, Class<T> clazz) {
+		return has(id) && (get(id, clazz) != null);
+	}
 
 	/**
 	 * 
