@@ -35,16 +35,20 @@ public class PeonController {
 	}
 	
 	@GetMapping("{id}")
-	public PeonWithoutIdDto getById(@PathVariable int id, HttpServletResponse httpResponse) {
+	public PeonWithoutIdDto getById(@PathVariable int id, HttpServletResponse response) {
 		PeonWithoutIdDto dto = peonService.get(id);
 		if (dto == null)
-			httpResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		return dto;
 	}
 	
 	@PostMapping
-	public int add(@RequestBody @Valid PeonWithoutIdDto peonWithoutIdDto) {
-		return peonService.add(peonWithoutIdDto);
+	public int add(@RequestBody @Valid PeonWithoutIdDto peonWithoutIdDto, HttpServletResponse response) {
+		int result = peonService.add(peonWithoutIdDto);
+		if(result > 0)
+			response.setStatus(HttpServletResponse.SC_CREATED);
+		return result;
+
 	}
 
 }

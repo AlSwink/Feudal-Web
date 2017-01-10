@@ -34,13 +34,19 @@ public class LordController {
 	}
 	
 	@GetMapping("{id}")
-	public LordWithoutIdDto get(@PathVariable int id) {
-		return lordService.get(id);
+	public LordWithoutIdDto get(@PathVariable int id, HttpServletResponse response) {
+		LordWithoutIdDto dto = lordService.get(id);
+		if (dto == null)
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		return dto;
 	}
 	
 	@PostMapping
-	public int add(@RequestBody @Valid LordWithoutIdDto lord) {
-		return lordService.add(lord);
+	public int add(@RequestBody @Valid LordWithoutIdDto lord, HttpServletResponse response) {
+		int result = lordService.add(lord);
+		if(result > 0)
+			response.setStatus(HttpServletResponse.SC_CREATED);
+		return result;
 	}
 	
 }
