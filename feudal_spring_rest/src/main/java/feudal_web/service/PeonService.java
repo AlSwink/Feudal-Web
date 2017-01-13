@@ -39,4 +39,14 @@ public class PeonService {
 		peon.setId(id);
 		kingdomService.put(peon);
 	}
+
+	public void patch(int id, PeonWithoutIdDto peonDto) {
+		Peon peon = peonMapper.peonWithoutIdDtoToPeon(peonDto);
+		peon.setId(id);
+		kingdomService.patch(peon);
+	}
+
+	public void delete(int id) {
+		kingdomService.delete(id);
+	}
 }

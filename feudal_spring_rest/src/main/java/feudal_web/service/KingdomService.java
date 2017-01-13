@@ -1,37 +1,42 @@
 package feudal_web.service;
 
-import java.util.ArrayList;
-import java.util.Set;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.validation.Validator;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.cooksys.ftd.assignments.collections.Kingdom;
 import com.cooksys.ftd.assignments.collections.model.Feudal;
-import com.cooksys.ftd.assignments.collections.model.Peon;
 
 import feudal_web.exception.CustomValidationFailedException;
 
 @Service
 public class KingdomService {
 
-	private Kingdom kingdom;
-	private ArrayList<Feudal> feudalIdTracker = new ArrayList<>();
+	private final Kingdom kingdom;
+	private AtomicInteger idGenerator = new AtomicInteger(0);
+	private HashMap<Integer, Feudal> idToFeudalMap = new HashMap<>();
 	
-	public KingdomService(Kingdom kingdom) {
+	
+	public KingdomService(Kingdom kingdom, Validator validator) {
 		super();
 		this.kingdom = kingdom;
 	}
 	
 	public int add(Feudal feudal) {
-		feudalIdTracker.add(feudal);
-		feudal.setId(feudalIdTracker.size());
+		feudal.setId(idGenerator.incrementAndGet());
+		idToFeudalMap.put(feudal.getId(), feudal);
 		kingdom.add(feudal);
 		return feudal.getId();
 	}
 
 	public boolean has(int id) {
-		return id > 0 && id <= feudalIdTracker.size();
+		return id > 0 && idToFeudalMap.containsKey(id);
 	}
 	
 	public <T extends Feudal> boolean has(int id, Class<T> clazz) {
@@ -44,14 +49,11 @@ public class KingdomService {
 	 * @return The Feudal that possesses the id, or null if no Feudal exists with that id
 	 */
 	public Feudal get(int id) {
-		if(has(id))
-			return feudalIdTracker.get(--id);
-		else
-			return null;
+		return idToFeudalMap.get(id);
 	}
 	
-	public Set<Feudal> getElements() {
-		return kingdom.getElements();
+	public Collection<Feudal> getElements() {
+		return idToFeudalMap.values();
 	}
 
 	public <T extends Feudal> T get(int id, Class<T> clazz) {
@@ -67,10 +69,16 @@ public class KingdomService {
 		return null;
 	}
 
-	public void put(Peon peon) {
-		//get em
-		feudalIdTracker.get(peon.getId() - 1);
-		//change em
+	public <T extends Feudal> void put(T feudal) {
+		BeanUtils.copyProperties(feudal, get(feudal.getId(), feudal.getClass()));
+	}
+
+	public <T extends Feudal> void patch(T feudal) {
+		idToFeudalMap.put(feudal.getId(), feudal);
+	}
+
+	public void delete(int id) {
+		idToFeudalMap.remove(id);
 	}
 	
 }

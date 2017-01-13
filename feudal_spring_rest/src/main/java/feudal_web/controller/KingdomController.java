@@ -1,5 +1,6 @@
 package feudal_web.controller;
 
+import java.util.Collection;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
@@ -52,7 +53,7 @@ public class KingdomController {
 	}
 	
 	@GetMapping
-	public Set<Feudal> get() {
+	public Collection<Feudal> get() {
 		return kingdomService.getElements();
 	}
 }

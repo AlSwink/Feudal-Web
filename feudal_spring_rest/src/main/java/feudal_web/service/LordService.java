@@ -1,5 +1,6 @@
 package feudal_web.service;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.cooksys.ftd.assignments.collections.model.Lord;
@@ -30,5 +31,21 @@ public class LordService {
 
 	public boolean has(int id) {
 		return kingdomService.has(id, Lord.class);
+	}
+
+	public void put(int id, LordWithoutIdDto lordDto) {
+		Lord lord = LordMapper.lordWithoutIdDtoToLord(lordDto);
+		lord.setId(id);
+		kingdomService.put(lord);
+	}
+
+	public void delete(int id) {
+		kingdomService.delete(id);
+	}
+
+	public void patch(int id, LordWithoutIdDto lordDto) {
+		Lord lord = LordMapper.lordWithoutIdDtoToLord(lordDto);
+		lord.setId(id);
+		kingdomService.patch(lord);
 	}
 }

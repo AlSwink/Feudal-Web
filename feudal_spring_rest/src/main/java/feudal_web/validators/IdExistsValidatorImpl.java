@@ -21,7 +21,7 @@ public class IdExistsValidatorImpl implements IdExistsValidator {
 	}
 
 	public boolean isValid(Integer id, ConstraintValidatorContext context) {
-		return id == 0 || kingdomService.has(id);
+		return id == null || id == 0 || kingdomService.has(id);
 	}
 
 }
