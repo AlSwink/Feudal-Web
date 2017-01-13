@@ -4,13 +4,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.validation.Validator;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.cooksys.ftd.assignments.collections.Kingdom;
 import com.cooksys.ftd.assignments.collections.model.Feudal;
 
 import feudal_web.exception.CustomValidationFailedException;
@@ -18,20 +15,16 @@ import feudal_web.exception.CustomValidationFailedException;
 @Service
 public class KingdomService {
 
-	private final Kingdom kingdom;
 	private AtomicInteger idGenerator = new AtomicInteger(0);
-	private HashMap<Integer, Feudal> idToFeudalMap = new HashMap<>();
+	private HashMap<Integer, Feudal> idToFeudalMap = new HashMap<>();	
 	
-	
-	public KingdomService(Kingdom kingdom, Validator validator) {
+	public KingdomService() {
 		super();
-		this.kingdom = kingdom;
 	}
 	
 	public int add(Feudal feudal) {
 		feudal.setId(idGenerator.incrementAndGet());
 		idToFeudalMap.put(feudal.getId(), feudal);
-		kingdom.add(feudal);
 		return feudal.getId();
 	}
 

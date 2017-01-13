@@ -4,8 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.cooksys.ftd.assignments.collections.Kingdom;
-
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
@@ -19,11 +17,6 @@ public class FeudalSpringRestApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FeudalSpringRestApplication.class, args);
-	}
-	
-	@Bean
-	public Kingdom kingdom() {
-		return new Kingdom();
 	}
 	
 	/**
