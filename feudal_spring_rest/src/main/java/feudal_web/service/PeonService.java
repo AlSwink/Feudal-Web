@@ -58,7 +58,7 @@ public class PeonService {
 			return Collections.emptyList();
 		return kingdomService.getElements(Peon.class).stream()
 				.filter(peon -> lordId.equals(peon.getParent().getId()))
-				.map(peonOfLord -> peonMapper.peonToPeonWithoutIdDto(peonOfLord))
+				.map(peonMapper::peonToPeonWithoutIdDto)
 				.collect(Collectors.toList());
 	}
 }
