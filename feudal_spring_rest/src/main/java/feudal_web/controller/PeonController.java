@@ -47,9 +47,9 @@ public class PeonController {
 	}
 	
 	@GetMapping
-	public List<PeonWithoutIdDto> getByLord(@RequestParam("lord") Integer lordId, HttpServletResponse response) {
+	public List<PeonWithoutIdDto> searchByLord(@RequestParam("lord") Integer lordId, HttpServletResponse response) {
 		lordService.has(lordId);
-		return peonService.getByLord(lordId);
+		return peonService.searchByLord(lordId);
 	}
 	
 	@GetMapping("{id}")

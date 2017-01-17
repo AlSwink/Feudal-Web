@@ -53,7 +53,7 @@ public class PeonService {
 		kingdomService.delete(id);
 	}
 
-	public List<PeonWithoutIdDto> getByLord(Integer lordId) {
+	public List<PeonWithoutIdDto> searchByLord(Integer lordId) {
 		if(lordId == null)
 			return Collections.emptyList();
 		return kingdomService.getElements(Peon.class).stream()
