@@ -1,5 +1,6 @@
 package feudal_web.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,6 +54,8 @@ public class PeonService {
 	}
 
 	public List<PeonWithoutIdDto> getByLord(Integer lordId) {
+		if(lordId == null)
+			return Collections.emptyList();
 		return kingdomService.getElements(Peon.class).stream()
 				.filter(peon -> lordId.equals(peon.getParent().getId()))
 				.map(peonOfLord -> peonMapper.peonToPeonWithoutIdDto(peonOfLord))
