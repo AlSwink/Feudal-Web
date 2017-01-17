@@ -33,7 +33,7 @@ public class KingdomController {
 	 * @return
 	 */
 	@RequestMapping(value = "{id}", method = RequestMethod.HEAD)
-	public void has(@PathVariable int id, HttpServletResponse httpResponse) {
+	public void has(@PathVariable Integer id, HttpServletResponse httpResponse) {
 		if(!kingdomService.has(id))
 			httpResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
 	}
@@ -45,7 +45,7 @@ public class KingdomController {
 	 * @return
 	 */
 	@GetMapping("{id}")
-	public Feudal getById(@PathVariable int id, HttpServletResponse httpResponse) {
+	public Feudal getById(@PathVariable Integer id, HttpServletResponse httpResponse) {
 		Feudal feudal = kingdomService.get(id);
 		if(feudal == null)
 			httpResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);

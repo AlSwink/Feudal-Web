@@ -33,13 +33,13 @@ public class LordController {
 	}
 	
 	@RequestMapping(method = RequestMethod.HEAD, value = "{id}")
-	public void has(@PathVariable int id, HttpServletResponse response) {
+	public void has(@PathVariable Integer id, HttpServletResponse response) {
 		if(!lordService.has(id))
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 	}
 	
 	@GetMapping("{id}")
-	public LordWithoutIdDto get(@PathVariable int id, HttpServletResponse response) {
+	public LordWithoutIdDto get(@PathVariable Integer id, HttpServletResponse response) {
 		LordWithoutIdDto dto = lordService.get(id);
 		if (dto == null)
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -47,25 +47,25 @@ public class LordController {
 	}
 	
 	@PostMapping
-	public int add(@RequestBody @Validated LordWithoutIdDto lord, HttpServletResponse response) {
-		int result = lordService.add(lord);
+	public Integer add(@RequestBody @Validated LordWithoutIdDto lord, HttpServletResponse response) {
+		Integer result = lordService.add(lord);
 		if(result > 0)
 			response.setStatus(HttpServletResponse.SC_CREATED);
 		return result;
 	}
 	
 	@PutMapping("{id}")
-	public void put(@PathVariable int id, @RequestBody @Validated LordWithoutIdDto lord, HttpServletResponse response) {
+	public void put(@PathVariable Integer id, @RequestBody @Validated LordWithoutIdDto lord, HttpServletResponse response) {
 		lordService.put(id, lord);
 	}
 	
 	@PatchMapping("{id}")
-	public void patch(@PathVariable int id, @RequestBody @Validated LordWithoutIdDto lord, HttpServletResponse response) {
+	public void patch(@PathVariable Integer id, @RequestBody @Validated LordWithoutIdDto lord, HttpServletResponse response) {
 		lordService.patch(id, lord);
 	}
 	
 	@DeleteMapping("{id}")
-	public void delete(@PathVariable int id) {
+	public void delete(@PathVariable Integer id) {
 		lordService.delete(id);
 	}
 }

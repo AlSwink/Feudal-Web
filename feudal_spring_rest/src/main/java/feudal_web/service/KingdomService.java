@@ -3,6 +3,7 @@ package feudal_web.service;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
@@ -22,17 +23,17 @@ public class KingdomService {
 		super();
 	}
 	
-	public int add(Feudal feudal) {
+	public Integer add(Feudal feudal) {
 		feudal.setId(idGenerator.incrementAndGet());
 		idToFeudalMap.put(feudal.getId(), feudal);
 		return feudal.getId();
 	}
 
-	public boolean has(int id) {
-		return id > 0 && idToFeudalMap.containsKey(id);
+	public boolean has(Integer id) {
+		return id != null && id > 0 && idToFeudalMap.containsKey(id);
 	}
 	
-	public <T extends Feudal> boolean has(int id, Class<T> clazz) {
+	public <T extends Feudal> boolean has(Integer id, Class<T> clazz) {
 		return has(id) && (get(id, clazz) != null);
 	}
 
@@ -41,19 +42,24 @@ public class KingdomService {
 	 * @param id The id of the Feudal to be retrieved
 	 * @return The Feudal that possesses the id, or null if no Feudal exists with that id
 	 */
-	public Feudal get(int id) {
+	public Feudal get(Integer id) {
 		return idToFeudalMap.get(id);
 	}
 	
 	public Collection<Feudal> getElements() {
 		return idToFeudalMap.values();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public <T extends Feudal> Collection<T> getElements(Class<T> feudalType) {
+		return (Collection<T>) idToFeudalMap.values().stream().filter(value -> feudalType.isInstance(value)).collect(Collectors.toSet());
+	}
 
-	public <T extends Feudal> T get(int id, Class<T> clazz) {
+	public <T extends Feudal> T get(Integer id, Class<T> clazz) {
 		return get(id, clazz, true);
 	}
 	
-	public <T extends Feudal> T get(int id, Class<T> clazz, boolean exceptionWhenNotFound) {
+	public <T extends Feudal> T get(Integer id, Class<T> clazz, boolean exceptionWhenNotFound) {
 		Feudal feudal = get(id);
 		if(clazz.isInstance(feudal))
 			return clazz.cast(feudal);
@@ -70,7 +76,7 @@ public class KingdomService {
 		idToFeudalMap.put(feudal.getId(), feudal);
 	}
 
-	public void delete(int id) {
+	public void delete(Integer id) {
 		idToFeudalMap.remove(id);
 	}
 	

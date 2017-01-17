@@ -19,31 +19,31 @@ public class LordService {
 		this.LordMapper = LordMapper;
 	}
 
-	public int add(LordWithoutIdDto LordWithoutIdDto) {
+	public Integer add(LordWithoutIdDto LordWithoutIdDto) {
 		Lord Lord = LordMapper.lordWithoutIdDtoToLord(LordWithoutIdDto);
 		Lord.setParent(kingdomService.get(LordWithoutIdDto.getParentId(), Lord.class, false));
 		return kingdomService.add(Lord);
 	}
 
-	public LordWithoutIdDto get(int id) {
+	public LordWithoutIdDto get(Integer id) {
 		return LordMapper.lordToLordWithoutIdDto(kingdomService.get(id, Lord.class, true));
 	}
 
-	public boolean has(int id) {
+	public boolean has(Integer id) {
 		return kingdomService.has(id, Lord.class);
 	}
 
-	public void put(int id, LordWithoutIdDto lordDto) {
+	public void put(Integer id, LordWithoutIdDto lordDto) {
 		Lord lord = LordMapper.lordWithoutIdDtoToLord(lordDto);
 		lord.setId(id);
 		kingdomService.put(lord);
 	}
 
-	public void delete(int id) {
+	public void delete(Integer id) {
 		kingdomService.delete(id);
 	}
 
-	public void patch(int id, LordWithoutIdDto lordDto) {
+	public void patch(Integer id, LordWithoutIdDto lordDto) {
 		Lord lord = LordMapper.lordWithoutIdDtoToLord(lordDto);
 		lord.setId(id);
 		kingdomService.patch(lord);
