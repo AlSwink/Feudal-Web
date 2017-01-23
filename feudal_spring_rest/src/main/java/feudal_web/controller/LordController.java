@@ -1,7 +1,6 @@
 package feudal_web.controller;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import feudal_web.dto.lord.LordWithoutIdDto;
-import feudal_web.dto.peon.PeonWithoutIdDto;
-import feudal_web.dto.validation.group.EnsureParentNotNull;
 import feudal_web.service.LordService;
 
 @Validated

@@ -1,6 +1,5 @@
 package feudal_web.service;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.cooksys.ftd.assignments.collections.model.Lord;

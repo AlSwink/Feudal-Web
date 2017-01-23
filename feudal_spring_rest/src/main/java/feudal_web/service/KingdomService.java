@@ -52,7 +52,9 @@ public class KingdomService {
 	
 	@SuppressWarnings("unchecked")
 	public <T extends Feudal> Collection<T> getElements(Class<T> feudalType) {
-		return (Collection<T>) idToFeudalMap.values().stream().filter(value -> feudalType.isInstance(value)).collect(Collectors.toSet());
+		return (Collection<T>) idToFeudalMap.values().stream()
+				.filter(value -> feudalType.isInstance(value))
+				.collect(Collectors.toSet());
 	}
 
 	public <T extends Feudal> T get(Integer id, Class<T> clazz) {

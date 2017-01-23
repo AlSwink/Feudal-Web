@@ -26,18 +26,24 @@ public class FeudalExceptionHandler extends ResponseEntityExceptionHandler {
 	@Override
 	protected final ResponseEntity<Object> handleHttpMessageNotReadable(final HttpMessageNotReadableException ex,
 			final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
-		return handleExceptionInternal(ex, ex.getMessage(), headers, HttpStatus.BAD_REQUEST, request);
+		ResponseEntity<Object> errorResponse = handleExceptionInternal(ex, ex.getMessage(), headers, HttpStatus.BAD_REQUEST, request);
+		log.debug(errorResponse.toString());
+		return errorResponse;
 	}
 
 	@Override
 	protected final ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex,
 			final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
-		return handleExceptionInternal(ex, ex.getMessage(), headers, HttpStatus.BAD_REQUEST, request);
+		ResponseEntity<Object> errorResponse = handleExceptionInternal(ex, ex.getMessage(), headers, HttpStatus.BAD_REQUEST, request);
+		log.debug(errorResponse.toString());
+		return errorResponse;
 	}
 
 	@ExceptionHandler
 	public final ResponseEntity<Object> handleBadRequest(final CustomValidationFailedException ex,
 			final WebRequest request) {
-		return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), ex.getStatusCode(), request);
+		ResponseEntity<Object> errorResponse = handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), ex.getStatusCode(), request);
+		log.debug(errorResponse.toString());
+		return errorResponse;
 	}
 }
